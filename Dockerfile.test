@@ -1,0 +1,10 @@
+FROM docker.io/library/ubuntu:18.04
+
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt update && \
+    apt upgrade -y && \
+    apt install -y tzdata vim-nox && \
+    rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["/usr/bin/vimtutor"]
+
