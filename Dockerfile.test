@@ -3,8 +3,10 @@ FROM docker.io/library/ubuntu:18.04
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && \
     apt upgrade -y && \
-    apt install -y tzdata vim-nox && \
+    apt install -y tzdata vim-nox wget && \
     rm -rf /var/lib/apt/lists/*
+
+RUN wget http://raw.githubusercontent.com/ros/rosdistro/master/rosdep/base.yaml
 
 ENTRYPOINT ["/usr/bin/vimtutor"]
 
