@@ -1,12 +1,13 @@
-FROM docker.io/library/ubuntu:18.04
+FROM quay.io/centos/centos:stream9
+# Using centos image since Ubuntu/Debian do not ship a version
+# of squid that can inspect ssl.
 
-RUN apt update && \
-    apt upgrade -y && \
-    apt install -y squid && \
-    rm -rf /var/lib/apt/lists/*
+RUN dnf upgrade -y && \
+    dnf install -y squid && \
+    dnf clean all && \
+  	rm -rf /var/cache/yum
 
-RUN chown -R proxy:proxy /var
-RUN chmod -R 775 /var
+RUN chown -R squid:squid /var
 
 COPY run_squid.sh /opt/run_squid.sh
 RUN chmod u+x /opt/run_squid.sh
