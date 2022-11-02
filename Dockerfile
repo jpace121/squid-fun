@@ -7,9 +7,12 @@ RUN dnf upgrade -y && \
     dnf clean all && \
   	rm -rf /var/cache/yum
 
-RUN chown -R squid:squid /var
+RUN mkdir -p /var/spool/squid && \
+    chown -R squid:squid /var
 
+COPY squid.conf /opt/squid.conf
 COPY run_squid.sh /opt/run_squid.sh
 RUN chmod u+x /opt/run_squid.sh
 
-ENTRYPOINT ["/opt/run_squid.sh" ]
+ENTRYPOINT ["/opt/run_squid.sh"]
+VOLUME ["/var/spool/squid"]
