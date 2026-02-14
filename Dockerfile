@@ -1,4 +1,4 @@
-FROM quay.io/centos/centos:stream9
+FROM quay.io/centos/centos:stream10
 # Using centos image since Ubuntu/Debian do not ship a version
 # of squid that can inspect ssl.
 
